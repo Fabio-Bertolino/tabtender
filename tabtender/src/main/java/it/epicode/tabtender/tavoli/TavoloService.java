@@ -1,6 +1,8 @@
 package it.epicode.tabtender.tavoli;
 
 import it.epicode.tabtender.common.CommonResponse;
+import it.epicode.tabtender.ordini.Ordine;
+import it.epicode.tabtender.ordini.OrdineRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,10 @@ import org.springframework.validation.annotation.Validated;
 public class TavoloService {
     @Autowired
     private TavoloRepository tavoloRepository;
+    @Autowired
+    private OrdineRepository ordineRepository;
 
-    public CommonResponse saveTavolo(TavoloRequest request) {
+    public CommonResponse saveTavolo(TavoloPostRequest request) {
         Tavolo tavolo = new Tavolo();
         BeanUtils.copyProperties(request, tavolo);
         tavoloRepository.save(tavolo);
@@ -28,7 +32,16 @@ public class TavoloService {
         Tavolo tavolo = tavoloRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tavolo non trovato "));
-        BeanUtils.copyProperties(request, tavolo);
+        tavolo.setNumeroPosti(request.getNumeroPosti());
+        tavolo.setDisponibile(request.isDisponibile());
+        if (request.getOrdineId() != null) {
+            Ordine ordine = ordineRepository
+                    .findById(request.getOrdineId())
+                    .orElseThrow(() -> new EntityNotFoundException("Ordine non trovato con id: " + request.getOrdineId()));
+            tavolo.setOrdine(ordine);
+        } else {
+            tavolo.setOrdine(null);
+        }
         return tavoloRepository.save(tavolo);
     }
 

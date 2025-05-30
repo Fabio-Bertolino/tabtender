@@ -7,6 +7,9 @@ import it.epicode.tabtender.ordini.OrdineService;
 import it.epicode.tabtender.prodotti.Prodotto;
 import it.epicode.tabtender.prodotti.ProdottoRepository;
 import it.epicode.tabtender.prodotti.ProdottoService;
+import it.epicode.tabtender.reparti.Reparto;
+import it.epicode.tabtender.reparti.RepartoRepository;
+import it.epicode.tabtender.reparti.RepartoService;
 import it.epicode.tabtender.tavoli.Tavolo;
 import it.epicode.tabtender.tavoli.TavoloRepository;
 import it.epicode.tabtender.tavoli.TavoloService;
@@ -41,6 +44,10 @@ public class CommonRunner implements CommandLineRunner {
     private TavoloService tavoloService;
     @Autowired
     private TavoloRepository tavoloRepository;
+    @Autowired
+    private RepartoService repartoService;
+    @Autowired
+    private RepartoRepository repartoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -74,6 +81,13 @@ public class CommonRunner implements CommandLineRunner {
         prodotto2.setVarianti(cappuccinoVarianti);
         prodottoRepository.save(prodotto2);
 
+        Prodotto prodotto3 = new Prodotto();
+        prodotto3.setNome("Maritozzo");
+        prodotto3.setPrezzo(1.8);
+        List<Variante> maritozzoVarianti = List.of(variante3);
+        prodotto3.setVarianti(maritozzoVarianti);
+        prodottoRepository.save(prodotto3);
+
         Tavolo tavolo1 = new Tavolo();
         tavolo1.setNumeroPosti(4);
 
@@ -97,5 +111,27 @@ public class CommonRunner implements CommandLineRunner {
         tavolo2.setOrdine(ordine2);
         ordineRepository.save(ordine2);
         tavoloRepository.save(tavolo2);
+
+        Ordine ordine3 = new Ordine();
+        List<Prodotto> prodottiOrdine3 = List.of(prodotto1);
+        ordine3.setProdotti(prodottiOrdine3);
+        ordine3.setPrezzoTotale(prodottiOrdine3.stream().map(prodotto -> prodotto.getPrezzo()).reduce(0.0, Double::sum));
+        ordineRepository.save(ordine3);
+
+        Tavolo tavolo3 = new Tavolo();
+        tavolo3.setNumeroPosti(2);
+        tavoloRepository.save(tavolo3);
+
+        Reparto reparto1 = new Reparto();
+        reparto1.setNome("Caffetteria");
+        List<Prodotto> prodottiReparto1 = List.of(prodotto1, prodotto2);
+        reparto1.setProdotti(prodottiReparto1);
+        repartoRepository.save(reparto1);
+
+        Reparto reparto2 = new Reparto();
+        reparto2.setNome("Cibo");
+        List<Prodotto> prodottiReparto2 = List.of(prodotto3);
+        reparto2.setProdotti(prodottiReparto2);
+        repartoRepository.save(reparto2);
     }
 }

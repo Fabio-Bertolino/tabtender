@@ -1,7 +1,6 @@
-package it.epicode.tabtender.ordini;
+package it.epicode.tabtender.reparti;
 
 import it.epicode.tabtender.prodotti.Prodotto;
-import it.epicode.tabtender.tavoli.Tavolo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,10 +10,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrdineResponse {
+public class RepartoResponse {
     private Long id;
+    private String nome;
     private List<Prodotto> prodotti;
-    double prezzoTotale;
-//    @JsonIgnore
-    private Long tavoloId;
 }
