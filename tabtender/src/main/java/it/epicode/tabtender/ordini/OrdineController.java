@@ -45,5 +45,12 @@ public class OrdineController {
                                              @RequestParam(name = "size", defaultValue = "20") int size,
                                              @RequestParam(name = "sort", defaultValue = "id") String sort) {
         return ordineService.findAllOrdini(page, size, sort);
-                                             }
+    }
+
+    @PutMapping("/ordini/{id}/sposta")
+    public void spostaOrdine(
+            @PathVariable Long id,
+            @RequestParam Long nuovoTavoloId) {
+        ordineService.spostaOrdine(id, nuovoTavoloId);
+    }
 }

@@ -27,7 +27,6 @@ public class Prodotto {
     private String immagine;
 
     @ManyToMany
-    //SE NON FUNZIONA MODIFICARE RELAZIONE?
     private List<Variante> varianti;
 
     private String note;

@@ -16,7 +16,7 @@ public class TavoloController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public CommonResponse saveTavolo(@RequestBody @Valid TavoloRequest request) {
+    public CommonResponse saveTavolo(@RequestBody @Valid TavoloPostRequest request) {
         return tavoloService.saveTavolo(request);
     }
 

@@ -1,5 +1,6 @@
 package it.epicode.tabtender.ordini;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.epicode.tabtender.prodotti.Prodotto;
 import it.epicode.tabtender.tavoli.Tavolo;
 import jakarta.persistence.*;
@@ -24,6 +25,7 @@ public class Ordine {
 
     double prezzoTotale;
 
-//    @OneToOne
-//    private Tavolo tavolo;
+    @OneToOne(mappedBy = "ordine")
+    @JsonIgnore
+    private Tavolo tavolo;
 }
