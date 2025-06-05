@@ -1,6 +1,8 @@
 package it.epicode.tabtender.prodotti;
 
 import it.epicode.tabtender.common.CommonResponse;
+import it.epicode.tabtender.reparti.Reparto;
+import it.epicode.tabtender.reparti.RepartoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,15 @@ import org.springframework.validation.annotation.Validated;
 public class ProdottoService {
     @Autowired
     private ProdottoRepository prodottoRepository;
+    @Autowired
+    private RepartoRepository repartoRepository;
 
     public CommonResponse saveProdotto(ProdottoRequest request) {
         Prodotto prodotto = new Prodotto();
         BeanUtils.copyProperties(request, prodotto);
+        Reparto reparto = repartoRepository.findById(request.getRepartoId())
+                .orElseThrow(() -> new EntityNotFoundException("Reparto non trovato con id: " + request.getRepartoId()));
+        prodotto.setReparto(reparto);
         prodottoRepository.save(prodotto);
         return new CommonResponse(prodotto.getId());
     }
@@ -29,6 +36,9 @@ public class ProdottoService {
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Prodotto non trovato "));
         BeanUtils.copyProperties(request, prodotto);
+        Reparto reparto = repartoRepository.findById(request.getRepartoId())
+                .orElseThrow(() -> new EntityNotFoundException("Reparto non trovato con id: " + request.getRepartoId()));
+        prodotto.setReparto(reparto);
         prodottoRepository.save(prodotto);
     }
 
@@ -47,9 +57,12 @@ public class ProdottoService {
                 prodotto.getId(),
                 prodotto.getNome(),
                 prodotto.getPrezzo(),
-                prodotto.getImmagine(),
-                prodotto.getVarianti(),
-                prodotto.getNote());
+//                prodotto.getImmagine()
+//                prodotto.getVarianti(),
+//                prodotto.getNote(),
+                prodotto.getReparto().getId(),
+                prodotto.getReparto().getNome()
+        );
     }
 
     public Page<ProdottoResponse> findAllProdotti(int page, int size, String sort) {
@@ -59,8 +72,11 @@ public class ProdottoService {
                 prodotto.getId(),
                 prodotto.getNome(),
                 prodotto.getPrezzo(),
-                prodotto.getImmagine(),
-                prodotto.getVarianti(),
-                prodotto.getNote()));
+//                prodotto.getImmagine(),
+//                prodotto.getVarianti(),
+//                prodotto.getNote(),
+                prodotto.getReparto().getId(),
+                prodotto.getReparto().getNome()
+        ));
     }
 }

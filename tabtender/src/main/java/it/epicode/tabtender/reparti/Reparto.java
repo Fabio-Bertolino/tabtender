@@ -1,5 +1,6 @@
 package it.epicode.tabtender.reparti;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.epicode.tabtender.prodotti.Prodotto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class Reparto {
     @Column(nullable = false)
     private String nome;
 
-    @OneToMany
+    @OneToMany(mappedBy = "reparto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Prodotto> prodotti;
 }

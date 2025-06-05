@@ -2,6 +2,7 @@ package it.epicode.tabtender.prodotti;
 
 import it.epicode.tabtender.varianti.Variante;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,9 +19,12 @@ public class ProdottoRequest {
     @PositiveOrZero
     private Double prezzo;
 
-    private String immagine;
+//    private String immagine;
 
-    private List<Variante> varianti;
+//    private List<Variante> varianti;
 
-    private String note;
+//    private String note;
+
+    @NotNull
+    private Long repartoId;
 }

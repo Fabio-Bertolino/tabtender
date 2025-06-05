@@ -22,7 +22,7 @@ public class Tavolo {
     @Column(nullable = false)
     private boolean disponibile = true;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "ordine_id")
     private Ordine ordine;
 }

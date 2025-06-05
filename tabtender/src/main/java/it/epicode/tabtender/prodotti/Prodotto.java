@@ -1,5 +1,7 @@
 package it.epicode.tabtender.prodotti;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import it.epicode.tabtender.reparti.Reparto;
 import it.epicode.tabtender.varianti.Variante;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,8 +28,13 @@ public class Prodotto {
 
     private String immagine;
 
-    @ManyToMany
-    private List<Variante> varianti;
+//    @ManyToMany
+//    private List<Variante> varianti;
 
-    private String note;
+//    private String note;
+
+    @ManyToOne
+    @JoinColumn(name = "reparto_id", nullable = false)
+    @JsonBackReference
+    private Reparto reparto;
 }

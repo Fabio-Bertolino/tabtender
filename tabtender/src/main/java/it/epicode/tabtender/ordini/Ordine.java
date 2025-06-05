@@ -2,6 +2,7 @@ package it.epicode.tabtender.ordini;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.epicode.tabtender.prodotti.Prodotto;
+import it.epicode.tabtender.prodotti_ordinati.ProdottoOrdinato;
 import it.epicode.tabtender.tavoli.Tavolo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,8 +21,9 @@ public class Ordine {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToMany
-    private List<Prodotto> prodotti;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ordine_id")
+    private List<ProdottoOrdinato> prodotti;
 
     double prezzoTotale;
 

@@ -29,7 +29,7 @@ public class TavoloController {
 
     @PutMapping("/{id}")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public void updateTavolo(@PathVariable(name = "id") Long id, @RequestBody @Valid TavoloRequest request) {
+    public void updateTavolo(@PathVariable(name = "id") Long id, @RequestBody @Valid TavoloPostRequest request) {
         tavoloService.updateTavolo(id, request);
     }
 

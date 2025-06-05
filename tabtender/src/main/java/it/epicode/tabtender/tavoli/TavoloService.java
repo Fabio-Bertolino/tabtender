@@ -28,20 +28,20 @@ public class TavoloService {
         return new CommonResponse(tavolo.getId());
     }
 
-    public Tavolo updateTavolo(Long id, TavoloRequest request) {
+    public Tavolo updateTavolo(Long id, TavoloPostRequest request) {
         Tavolo tavolo = tavoloRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tavolo non trovato "));
         tavolo.setNumeroPosti(request.getNumeroPosti());
-        tavolo.setDisponibile(request.isDisponibile());
-        if (request.getOrdineId() != null) {
-            Ordine ordine = ordineRepository
-                    .findById(request.getOrdineId())
-                    .orElseThrow(() -> new EntityNotFoundException("Ordine non trovato con id: " + request.getOrdineId()));
-            tavolo.setOrdine(ordine);
-        } else {
-            tavolo.setOrdine(null);
-        }
+//        tavolo.setDisponibile(request.isDisponibile());
+//        if (request.getOrdineId() != null) {
+//            Ordine ordine = ordineRepository
+//                    .findById(request.getOrdineId())
+//                    .orElseThrow(() -> new EntityNotFoundException("Ordine non trovato con id: " + request.getOrdineId()));
+//            tavolo.setOrdine(ordine);
+//        } else {
+//            tavolo.setOrdine(null);
+//        }
         return tavoloRepository.save(tavolo);
     }
 

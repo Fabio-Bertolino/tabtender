@@ -1,6 +1,6 @@
 package it.epicode.tabtender.ordini;
 
-import it.epicode.tabtender.prodotti.Prodotto;
+import it.epicode.tabtender.prodotti_ordinati.ProdottoOrdinatoRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 public class OrdineRequest {
     @Valid
-    private List<Prodotto> prodotti;
+    private List<ProdottoOrdinatoRequest> prodotti;
     private Long tavoloId;
 }

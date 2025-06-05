@@ -15,7 +15,10 @@ public class ProdottoResponse {
     private Long id;
     private String nome;
     private Double prezzo;
-    private String immagine;
-    private List<Variante> varianti;
-    private String note;
+//    private String immagine;
+//    private List<Variante> varianti;
+//    private String note;
+
+    private Long repartoId;
+    private String repartoNome;
 }
