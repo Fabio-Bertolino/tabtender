@@ -79,6 +79,7 @@ public class OrdineService {
         ordineRepository.save(ordine);
 
         tavolo.setOrdine(ordine);
+        tavolo.setDisponibile(false);
         tavoloRepository.save(tavolo);
 
         return new CommonResponse(ordine.getId());
@@ -109,6 +110,7 @@ public class OrdineService {
         Tavolo tavolo = ordine.getTavolo();
         if (tavolo != null) {
             tavolo.setOrdine(null);
+            tavolo.setDisponibile(true);
             tavoloRepository.save(tavolo);
         }
         ordineRepository.delete(ordine);
