@@ -145,14 +145,16 @@ public class OrdineService {
         Tavolo tavoloCorrente = ordine.getTavolo();
         if (tavoloCorrente != null) {
             tavoloCorrente.setOrdine(null);
+            tavoloCorrente.setDisponibile(true);
         }
         Tavolo nuovoTavolo = tavoloRepository.findById(nuovoTavoloId)
                 .orElseThrow(() -> new EntityNotFoundException("Tavolo non trovato"));
 
         nuovoTavolo.setOrdine(ordine);
+        nuovoTavolo.setDisponibile(false);
         ordine.setTavolo(nuovoTavolo);
 
-//        tavoloRepository.save(tavoloCorrente); // solo se necessario
+        tavoloRepository.save(tavoloCorrente);
         tavoloRepository.save(nuovoTavolo);
 //        ordineRepository.save(ordine); // opzionale se cascade presente
     }

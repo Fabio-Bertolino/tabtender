@@ -47,7 +47,7 @@ public class OrdineController {
         return ordineService.findAllOrdini(page, size, sort);
     }
 
-    @PutMapping("/ordini/{id}/sposta")
+    @PutMapping("/{id}/sposta")
     public void spostaOrdine(
             @PathVariable Long id,
             @RequestParam Long nuovoTavoloId) {
