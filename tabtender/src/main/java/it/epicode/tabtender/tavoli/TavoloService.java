@@ -28,7 +28,7 @@ public class TavoloService {
         return new CommonResponse(tavolo.getId());
     }
 
-    public Tavolo updateTavolo(Long id, TavoloPostRequest request) {
+    public Tavolo updateTavolo(Long id, TavoloPutRequest request) {
         Tavolo tavolo = tavoloRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tavolo non trovato "));
@@ -58,6 +58,7 @@ public class TavoloService {
                 .orElseThrow(() -> new EntityNotFoundException("Tavolo non trovato "));
         return new TavoloResponse(
                 tavolo.getId(),
+                tavolo.getNumeroTavolo(),
                 tavolo.getNumeroPosti(),
                 tavolo.isDisponibile(),
                 tavolo.getOrdine());
@@ -68,6 +69,7 @@ public class TavoloService {
         Page<Tavolo> tavoloPage = tavoloRepository.findAll(pageable);
         return tavoloPage.map(tavolo -> new TavoloResponse(
                 tavolo.getId(),
+                tavolo.getNumeroTavolo(),
                 tavolo.getNumeroPosti(),
                 tavolo.isDisponibile(),
                 tavolo.getOrdine()));

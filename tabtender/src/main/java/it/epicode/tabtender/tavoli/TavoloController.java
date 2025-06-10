@@ -29,7 +29,7 @@ public class TavoloController {
 
     @PutMapping("/{id}")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public void updateTavolo(@PathVariable(name = "id") Long id, @RequestBody @Valid TavoloPostRequest request) {
+    public void updateTavolo(@PathVariable(name = "id") Long id, @RequestBody @Valid TavoloPutRequest request) {
         tavoloService.updateTavolo(id, request);
     }
 
@@ -42,8 +42,8 @@ public class TavoloController {
     @GetMapping
 //    @PreAuthorize("isAuthenticated()")
     public Page<TavoloResponse> getAllTavoli(@RequestParam(name = "page", defaultValue = "0") int page,
-                                             @RequestParam(name = "size", defaultValue = "20") int size,
-                                             @RequestParam(name = "sort", defaultValue = "id") String sort) {
+                                             @RequestParam(name = "size", defaultValue = "#{T(java.lang.Integer).MAX_VALUE}") int size,
+                                             @RequestParam(name = "sort", defaultValue = "numeroTavolo") String sort) {
         return tavoloService.findAllTavoli(page, size, sort);
                                              }
 }

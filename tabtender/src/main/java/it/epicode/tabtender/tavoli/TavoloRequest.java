@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TavoloRequest {
     @PositiveOrZero
+    private int numeroTavolo;
+
+    @PositiveOrZero
     private int numeroPosti;
 
     private boolean disponibile;

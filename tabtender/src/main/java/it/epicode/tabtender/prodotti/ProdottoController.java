@@ -42,7 +42,7 @@ public class ProdottoController {
     @GetMapping
 //    @PreAuthorize("isAuthenticated()")
     public Page<ProdottoResponse> getAllProdotti(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                 @RequestParam(name = "size", defaultValue = "20") int size,
+                                                 @RequestParam(name = "size", defaultValue = "#{T(java.lang.Integer).MAX_VALUE}") int size,
                                                  @RequestParam(name = "sort", defaultValue = "id") String sort) {
         return prodottoService.findAllProdotti(page, size, sort);
     }

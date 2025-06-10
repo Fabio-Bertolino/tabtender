@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TavoloPostRequest {
-    @PositiveOrZero
-    private int numeroTavolo;
+public class TavoloPutRequest {
     @PositiveOrZero
     private int numeroPosti;
 }

@@ -42,7 +42,7 @@ public class RepartoController {
     @GetMapping
 //    @PreAuthorize("isAuthenticated()")
     public Page<RepartoResponse> getAllReparti(@RequestParam(name = "page", defaultValue = "0") int page,
-                                               @RequestParam(name = "size", defaultValue = "20") int size,
+                                               @RequestParam(name = "size", defaultValue = "#{T(java.lang.Integer).MAX_VALUE}") int size,
                                                @RequestParam(name = "sort", defaultValue = "id") String sort) {
         return repartoService.findAllReparti(page, size, sort);
                                                }

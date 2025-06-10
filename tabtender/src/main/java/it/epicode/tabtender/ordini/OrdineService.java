@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -76,6 +78,11 @@ public class OrdineService {
                 .orElseThrow(() -> new EntityNotFoundException("Tavolo non trovato con id: " + request.getTavoloId()));
         ordine.setTavolo(tavolo);
 
+        ordine.setNomeUtente(request.getNomeUtente());
+
+        LocalDateTime date = LocalDateTime.now();
+        ordine.setDataOrdine(date);
+
         ordineRepository.save(ordine);
 
         tavolo.setOrdine(ordine);
@@ -98,6 +105,11 @@ public class OrdineService {
         Tavolo tavolo = tavoloRepository.findById(request.getTavoloId())
                 .orElseThrow(() -> new EntityNotFoundException("Tavolo non trovato con id: " + request.getTavoloId()));
         ordine.setTavolo(tavolo);
+
+        ordine.setNomeUtente(request.getNomeUtente());
+
+        LocalDateTime date = LocalDateTime.now();
+        ordine.setUltimaModifica(date);
 
         ordineRepository.save(ordine);
     }
@@ -124,7 +136,10 @@ public class OrdineService {
                 ordine.getId(),
                 ordine.getProdotti(),
                 ordine.getPrezzoTotale(),
-                ordine.getTavolo().getId());
+                ordine.getTavolo().getId(),
+                ordine.getNomeUtente(),
+                ordine.getDataOrdine(),
+                ordine.getUltimaModifica());
     }
 
     public Page<OrdineResponse> findAllOrdini(int page, int size, String sort) {
@@ -134,7 +149,10 @@ public class OrdineService {
                 ordine.getId(),
                 ordine.getProdotti(),
                 ordine.getPrezzoTotale(),
-                ordine.getTavolo().getId()));
+                ordine.getTavolo().getId(),
+                ordine.getNomeUtente(),
+                ordine.getDataOrdine(),
+                ordine.getUltimaModifica()));
     }
 
     @Transactional

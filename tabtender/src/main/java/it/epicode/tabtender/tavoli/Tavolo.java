@@ -16,6 +16,9 @@ public class Tavolo {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(nullable = false, unique = true)
+    private int numeroTavolo;
+
     @Column(nullable = false)
     private int numeroPosti;
 

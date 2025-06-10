@@ -15,4 +15,5 @@ public class OrdineRequest {
     @Valid
     private List<ProdottoOrdinatoRequest> prodotti;
     private Long tavoloId;
+    private String nomeUtente;
 }

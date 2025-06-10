@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Configuration
@@ -101,14 +103,17 @@ public class CommonRunner implements CommandLineRunner {
         prodottoRepository.save(prodotto3);
 
         Tavolo tavolo1 = new Tavolo();
+        tavolo1.setNumeroTavolo(1);
         tavolo1.setNumeroPosti(4);
         tavoloRepository.save(tavolo1);
 
         Tavolo tavolo2 = new Tavolo();
+        tavolo2.setNumeroTavolo(2);
         tavolo2.setNumeroPosti(2);
         tavoloRepository.save(tavolo2);
 
         Tavolo tavolo3 = new Tavolo();
+        tavolo3.setNumeroTavolo(3);
         tavolo3.setNumeroPosti(2);
         tavoloRepository.save(tavolo3);
 
@@ -121,6 +126,8 @@ public class CommonRunner implements CommandLineRunner {
                 po1.getProdotto()
                         .getPrezzo() * po1.getQuantita() + po2.getProdotto().getPrezzo() * po2.getQuantita());
         ordine1.setTavolo(tavolo1);
+        ordine1.setNomeUtente("Mattia");
+        ordine1.setDataOrdine(LocalDateTime.now());
         ordineRepository.save(ordine1);
 
         tavolo1.setDisponibile(false);
@@ -133,6 +140,8 @@ public class CommonRunner implements CommandLineRunner {
         ordine2.setProdotti(List.of(po3));
         ordine2.setPrezzoTotale(po3.getProdotto().getPrezzo() * po3.getQuantita());
         ordine2.setTavolo(tavolo2);
+        ordine2.setNomeUtente("Gaia");
+        ordine2.setDataOrdine(LocalDateTime.now());
         ordineRepository.save(ordine2);
 
         tavolo2.setDisponibile(false);

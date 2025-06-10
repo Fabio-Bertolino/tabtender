@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TavoloResponse {
     private Long id;
+    private int numeroTavolo;
     private int numeroPosti;
     private boolean disponibile;
     private Ordine ordine;
